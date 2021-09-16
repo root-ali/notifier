@@ -1,0 +1,17 @@
+astroid==2.5.1
+click==7.1.2
+Flask==1.1.2
+isort==5.7.0
+itsdangerous==1.1.0
+Jinja2==2.11.3
+lazy-object-proxy==1.5.2
+MarkupSafe==1.1.1
+mccabe==0.6.1
+pylint==2.7.2
+toml==0.10.2
+Werkzeug==1.0.1
+wrapt==1.12.1
+Flask-HTTPAuth==4.2.0
+kavenegar==1.1.2
+gunicorn==20.0.4
+flask_validate_json

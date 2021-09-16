@@ -1,0 +1,7 @@
+# Ignore
+__pycache__
+.dockerignore
+.vscode
+venv
+Dockerfile
+
