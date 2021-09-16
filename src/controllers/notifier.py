@@ -49,7 +49,6 @@ def sendSMS():
             try:
                 api = KavenegarAPI(kavenegar_api_key)
                 params = {
-                    'sender' : '100000037177',
                     'receptor': receptor,
                     'message': sms,
                 }
