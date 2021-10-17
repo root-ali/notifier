@@ -10,6 +10,7 @@ In testing stage
 
 ## How to:
 
+### Grafana
 For running this project you can use docker and should set ADMIN_PASS enviroment variable for sending sms.
 
 ```bash
@@ -37,3 +38,31 @@ for config alert rule in dashboard in getting sms you need config this two tags:
 ![tags](https://user-images.githubusercontent.com/25849537/133682356-0d372ac3-3c52-47c0-87d6-cef1d139c64d.jpg)
 
 in receptor tags you can config the mobile number you want to receive the alert. you should seperated number with comma ','.
+
+### AlertManager
+For using with Alertmanager you should set labels and annotations in alerts rule.
+
+sample alert rule config:
+
+```
+{
+  "receiver": "team-sms",
+  "status": "firing",
+  "alerts": [
+    {
+      "status": "firing",
+      "labels": {
+        "alertname": "test-123",
+        "sms": "true",
+        "receptor": "09xxxxxxxxx,09xxxxxxxxx"
+      },
+      "annotation": {
+        "summary": "sample message"
+      }
+    }
+  ],
+  "commonLabels": {
+    "key": "value"
+  }
+}
+```
