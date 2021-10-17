@@ -79,13 +79,11 @@ def alertManager():
     app.logger.info("new notifier request received %s" , time_of_notif)
     try:
         body = request.json
-        print ("body is %s" , body)
         alerts = body["alerts"]
         for alert in alerts:
             if "sms" in alert["labels"]:
                 if "receptor" in alert["labels"]:
                     receptor = alert["labels"]["receptor"]
-                    print (receptor)
                 else:
                     app.logger.info("receptor not found")
                     return '{"status" : "error" , "message" : "receptor not found" }', 200
