@@ -88,7 +88,7 @@ def alertManager():
                     app.logger.info("receptor not found")
                     return '{"status" : "error" , "message" : "receptor not found" }', 200
                 if "annotation" in alert:
-                    message = alert["annotation"]["summary"]
+                    message = alert["status"] + "\n" + alert["annotation"]["summary"] 
                 else:
                     app.logger.info("annotation not found")
                     return '{"status":"error" , "message" : "annotation not found"}', 200
