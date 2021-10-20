@@ -52,10 +52,11 @@ def grafana():
             ruleName = body["ruleName"]
             state = body["state"]
             receptor = body["tags"]["receptor"]
-            sms = "\n".join([message, ruleName, state , time_of_notif ])
+            text = "\n".join([message, ruleName, state , time_of_notif ])
             app.logger.info("receptor %s" , receptor)
-            app.logger.info("sms %s" , sms)
-            if sms.sendSMS(sms, receptor):
+            app.logger.info("sms %s" , text)
+            print (text)
+            if sms.sendSMS(text, receptor):
                 return '{"status" : "OK"}' , 200
             else:
                 return '{"status":"error" , "message" : "sms not send"}' , 400
