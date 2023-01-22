@@ -1,11 +1,12 @@
-FROM python:3.9-alpine
+FROM golang:1.19 as build
 
-WORKDIR /app/
-
+WORKDIR /go/src/app
 COPY . .
 
-RUN pip install -r requirement.txt
+RUN go mod download
+RUN CGO_ENABLED=0 go build -o /go/bin/app ./cmd/server/main.go
 
-EXPOSE 5000
-
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "wsgi:app"]
+# Now copy it into our base image.
+FROM gcr.io/distroless/static-debian11
+COPY --from=build /go/bin/app /
+CMD ["/app"]
