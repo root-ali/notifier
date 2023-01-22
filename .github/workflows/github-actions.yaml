@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo testing github actions
+      - run: ls
       - name: building image
         uses: docker/build-push-action@v3
         with:
