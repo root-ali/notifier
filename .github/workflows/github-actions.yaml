@@ -7,6 +7,8 @@ jobs:
     steps:
       - run: echo testing github actions
       - uses: actions/checkout@v3
+      - name: login to docker hub
+        run: echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
       - name: build docker image
-        run: docker image build -t notifier .
+        run: docker image build -t root-ali/notifier:0.3 . && docker image push root-ali/notifier:0.3
           
