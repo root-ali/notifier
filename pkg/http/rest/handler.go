@@ -11,6 +11,7 @@ import (
 	helmet "github.com/danielkov/gin-helmet"
 	"github.com/gin-contrib/logger"
 	"github.com/gin-gonic/gin"
+	"github.com/spf13/viper"
 )
 
 func Handler() *gin.Engine {
@@ -27,8 +28,12 @@ func Handler() *gin.Engine {
 	router.Use(logger.SetLogger())
 	router.Use(helmet.Default())
 	router.SetTrustedProxies(nil)
-
-	groupRouter := router.Group("api/v1")
+	viper.BindEnv("ADMIN_PASS")
+	adminPassEnv := viper.Get("ADMIN_PASS")
+	adminPassword := fmt.Sprintf("%v", adminPassEnv)
+	groupRouter := router.Group("api/v1", gin.BasicAuth(gin.Accounts{
+		"admin": adminPassword,
+	}))
 	groupRouter.POST("/grafana", grafanaAlertHandler)
 	groupRouter.POST("/alertmanager", alertManagerHandler)
 
